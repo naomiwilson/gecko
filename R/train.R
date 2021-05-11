@@ -29,7 +29,7 @@ calculate_probability = function(x, feature, params_table) {
     return(params_table["pNotDetected",feature])
   }  else {
     #Prob detected from beta div
-    return(c(1- params_table["pNotDetected",feature])*dbeta(x = x, shape1 = params_table["shape1",feature], shape2 = params_table["shape2",feature]))
+    return(c(1- params_table["pNotDetected",feature])*stats::dbeta(x = x, shape1 = params_table["shape1",feature], shape2 = params_table["shape2",feature]))
   }
 }
 
@@ -53,8 +53,8 @@ getMapEstimates = function(taxa, sig_a = 30, sig_b = 100) {
   mu_a = 1 # default starting place looks like presence vs absence - can make user-defined if they have a good idea of the presence/absence distribution
   mu_b = 1 # default starting place looks like presence vs absence
   i = 0
-  alpha_old = runif(1, min = 0, max = 2)
-  beta_old = runif(1, min = 0, max = 100)
+  alpha_old = stats::runif(1, min = 0, max = 2)
+  beta_old = stats::runif(1, min = 0, max = 100)
   while(TRUE) {
     if (i>1000) {break}
     g_1 = digamma(alpha_old+beta_old) - digamma(alpha_old) + mean(log(taxa)) + prior(alpha_old, mu = mu_a, sig = sig_a)/n
@@ -69,8 +69,8 @@ getMapEstimates = function(taxa, sig_a = 30, sig_b = 100) {
     #Ensure Solution is Not Singular
     matrix_a = try(solve(matrix_a), silent = TRUE)
     if (class(matrix_a) == "try-error") {
-      alpha_old = runif(1, min = 0, max = 2)
-      beta_old = runif(1, min = 0, max = 100)
+      alpha_old = stats::runif(1, min = 0, max = 2)
+      beta_old = stats::runif(1, min = 0, max = 100)
       i = i+1
       next
     }
@@ -79,8 +79,8 @@ getMapEstimates = function(taxa, sig_a = 30, sig_b = 100) {
     alpha_new = results[1]
     beta_new = results[2]
     if (alpha_new<0 | beta_new<0) {
-      alpha_old = runif(1, min = 0, max = 2)  # max values were chosen by Ariel to keep alpha from exploding (another thing that could be user-defined)
-      beta_old = runif(1, min = 0, max = 100)
+      alpha_old = stats::runif(1, min = 0, max = 2)  # max values were chosen by Ariel to keep alpha from exploding (another thing that could be user-defined)
+      beta_old = stats::runif(1, min = 0, max = 100)
       i = i+1
       next
     }
