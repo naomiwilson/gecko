@@ -160,7 +160,7 @@ PlotAllROCByFeature <- function(sample_data, perform_NBC_output, train_NBC_outpu
     labels=roc_obj$response
     scores=roc_obj$predictor
     label_color = sample(col_vector,1)
-    thresholdBest = coords(roc_obj, "best", ret = "threshold", transpose = FALSE)
+    thresholdBest = pROC::coords(roc_obj, "best", ret = "threshold", transpose = FALSE)
     lines(FPR, TPR, type="l", col=label_color)
     if (want_label == TRUE){
       if (sum(row.names(featureAUCsRanked[idx1:idx2,]) %in% asv)==1) {
