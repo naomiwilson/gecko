@@ -13,7 +13,6 @@ make_sample_score_histograms(
   class1.color = "#DE4968FF",
   class0.color = "#51127CFF",
   both.color = "lightblue",
-  class.to.plot,
   x.label = "Sample Score",
   numbins = 10
 )
