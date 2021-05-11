@@ -42,6 +42,9 @@ prior = function(alpha, mu, sig) {
 
 #' Maximum a posteriori estimation
 #'
+#' @param taxa vector of relative abundances for a given taxon
+#' @param sig_a Gaussian prior parameter for alpha (default=30)
+#' @param sig_b Gaussian prior parameter for beta (default=100)
 #' @export
 getMapEstimates = function(taxa, sig_a = 30, sig_b = 100) {
   taxa = taxa[taxa>0]
