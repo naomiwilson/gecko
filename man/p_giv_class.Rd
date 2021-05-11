@@ -2,10 +2,22 @@
 % Please edit documentation in R/train.R
 \name{p_giv_class}
 \alias{p_giv_class}
-\title{General Calculate P(X|Y) function)}
+\title{Calculate P(X|Y) function}
 \usage{
 p_giv_class(features, asv_table, param_table, sample_data)
 }
+\arguments{
+\item{features}{list of feature names for indexing rows from asv_table}
+
+\item{asv_table}{rows as features, columns as samples}
+
+\item{param_table}{output of acquire_parameters for the class of choice}
+
+\item{sample_data}{character matrix: column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")}
+}
+\value{
+likelihood value
+}
 \description{
-General Calculate P(X|Y) function)
+Calculate P(X|Y) function
 }

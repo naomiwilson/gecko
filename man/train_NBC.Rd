@@ -2,26 +2,22 @@
 % Please edit documentation in R/train.R
 \name{train_NBC}
 \alias{train_NBC}
-\title{NBC Training Function"asv_table" = double\preformatted{    rows= ASV names, cols=sample names
-}
-
-"sample_data" = character matrix
-column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
-"minimum_detection" = integer
-is how many samples in which the ASV has to be present in to be included in the training
-"min_rel_abund" = integer
-sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present}
+\title{NBC Training Function}
 \usage{
 train_NBC(asv_table, sample_data, minimum_detection, min_rel_abund)
 }
-\description{
-NBC Training Function"asv_table" = double\preformatted{    rows= ASV names, cols=sample names
-}
+\arguments{
+\item{asv_table}{double: rows= ASV names, cols=sample names}
 
-"sample_data" = character matrix
-column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
-"minimum_detection" = integer
-is how many samples in which the ASV has to be present in to be included in the training
-"min_rel_abund" = integer
-sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present
+\item{sample_data}{character matrix: column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")}
+
+\item{minimum_detection}{integer is how many samples in which the ASV has to be present in to be included in the training}
+
+\item{min_rel_abund}{integer sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present}
+}
+\value{
+nested matrix containing 1) parameters for class 1, 2) class 2, 3) both classes, 4) the class names in order, and 5) probability of class 1
+}
+\description{
+NBC Training Function
 }

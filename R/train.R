@@ -33,6 +33,11 @@ calculate_probability = function(x, feature, params_table) {
   }
 }
 
+#' Gaussian prior function for MAP estimation
+#'
+#' @param alpha beta function parameter
+#' @param mu mu
+#' @param sig sigma
 #' @export
 prior = function(alpha, mu, sig) {
   # Gaussian distribution
@@ -45,6 +50,7 @@ prior = function(alpha, mu, sig) {
 #' @param taxa vector of relative abundances for a given taxon
 #' @param sig_a Gaussian prior parameter for alpha (default=30)
 #' @param sig_b Gaussian prior parameter for beta (default=100)
+#' @return fit beta parameters
 #' @export
 getMapEstimates = function(taxa, sig_a = 30, sig_b = 100) {
   taxa = taxa[taxa>0]
@@ -100,7 +106,11 @@ getMapEstimates = function(taxa, sig_a = 30, sig_b = 100) {
 }
 
 
-#' #General Acquire Parameters Function
+#' General Acquire Parameters Function
+#'
+#' @param asv_table rows= ASV names, cols=sample names
+#' @param limit_of_detection relative abundance cutoff
+#' @return savedParams table of P(not detected) and 2 beta parameters
 #' @export
 acquire_parameters = function(asv_table, limit_of_detection) {
   pNotDetected = apply(X = asv_table, MARGIN = 1, estimate_binomial_parameter, limit_of_detection)
@@ -110,7 +120,13 @@ acquire_parameters = function(asv_table, limit_of_detection) {
   return(savedParams)
 }
 
-#' General Calculate P(X|Y) function)
+#' Calculate P(X|Y) function
+#'
+#' @param features list of feature names for indexing rows from asv_table
+#' @param asv_table rows as features, columns as samples
+#' @param param_table output of acquire_parameters for the class of choice
+#' @param sample_data character matrix: column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
+#' @return likelihood value
 #' @export
 p_giv_class = function(features, asv_table, param_table, sample_data) {
   p_given_class = matrix(nrow = length(features), ncol = dim(as.matrix(asv_table))[2])
@@ -136,30 +152,12 @@ p_giv_class = function(features, asv_table, param_table, sample_data) {
   return(p_given_class)
 }
 
-#' @export
-make_confusion_matrix = function(p1v2) {
-  final = as.factor(p1v2["result",])
-  truth = as.factor(p1v2["truth",])
-  output = caret::confusionMatrix(final, truth)
-}
-
-#' @export
-get_modeled_features = function(model) {
-  modeled_features = colnames(model[[1]])
-  return(modeled_features)
-}
-
 #' NBC Training Function
-#'   # "asv_table" = double
-#'         rows= ASV names, cols=sample names
-#' "sample_data" = character matrix
-#'         column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
-#' "minimum_detection" = integer
-#'         is how many samples in which the ASV has to be present in to be included in the training
-#' "min_rel_abund" = integer
-#'         sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present
-#'
-#'
+#' @param asv_table double: rows= ASV names, cols=sample names
+#' @param sample_data character matrix: column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
+#' @param minimum_detection integer is how many samples in which the ASV has to be present in to be included in the training
+#' @param min_rel_abund integer sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present
+#' @return nested matrix containing 1) parameters for class 1, 2) class 2, 3) both classes, 4) the class names in order, and 5) probability of class 1
 #' @export
 train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund) {
   #filter asv_table

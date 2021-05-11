@@ -13,6 +13,9 @@ getMapEstimates(taxa, sig_a = 30, sig_b = 100)
 
 \item{sig_b}{Gaussian prior parameter for beta (default=100)}
 }
+\value{
+fit beta parameters
+}
 \description{
 Maximum a posteriori estimation
 }

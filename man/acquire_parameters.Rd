@@ -2,10 +2,18 @@
 % Please edit documentation in R/train.R
 \name{acquire_parameters}
 \alias{acquire_parameters}
-\title{#General Acquire Parameters Function}
+\title{General Acquire Parameters Function}
 \usage{
 acquire_parameters(asv_table, limit_of_detection)
 }
+\arguments{
+\item{asv_table}{rows= ASV names, cols=sample names}
+
+\item{limit_of_detection}{relative abundance cutoff}
+}
+\value{
+savedParams table of P(not detected) and 2 beta parameters
+}
 \description{
-#General Acquire Parameters Function
+General Acquire Parameters Function
 }
