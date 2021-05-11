@@ -11,7 +11,7 @@ make_confusion_matrix = function(p1v2) {
 #' @param train_NBC_output output from train_NBC
 #' @export
 get_modeled_features = function(train_NBC_output) {
-  modeled_features = colnames(train_NBC_outputl[[1]])
+  modeled_features = colnames(train_NBC_output[[1]])
   return(modeled_features)
 }
 
