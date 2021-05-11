@@ -2,9 +2,9 @@
 #'
 #' This function estimates probability of non-detection per taxon:
 #' Number of samples below the limit of detection divided by
-#' the total number of samples. 
+#' the total number of samples.
 #' A pseudocount of 1/2 is also included.
-#' 
+#'
 #' @param taxa
 #' @param limit_of_detection numeric relative abundance value
 #' @return numeric weight value
@@ -41,7 +41,7 @@ prior = function(alpha, mu, sig) {
 }
 
 #' Maximum a posteriori estimation
-#' 
+#'
 #' @export
 getMapEstimates = function(taxa) {
   taxa = taxa[taxa>0]
@@ -159,8 +159,8 @@ get_modeled_features = function(model) {
 #'         is how many samples in which the ASV has to be present in to be included in the training
 #' "min_rel_abund" = integer
 #'         sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present
-#' 
-#' 
+#'
+#'
 #' @export
 train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund) {
   #filter asv_table

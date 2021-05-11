@@ -1,13 +1,9 @@
 #' Use trained model to predict on data
-#'   # "model" = object
-#'         direct output from train_NBC
-#' "asv_table" = double
-#'         rows= ASV names, cols=sample names
-#' "sample_data" = character matrix
-#'         column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
-#' "prob_class1" = integer
-#'         number samples of test class 1 (class 1 is alphabetically first, class 2 is next) / total number samples
-#'         see "sample_classes" from train_NBC to check order
+#'
+#' @param model (object) direct output from train_NBC
+#' @param asv_table (double) rows= ASV names, cols=sample names
+#' @param sample_data (character matrix) column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
+#' @param prob_class1 (integer) number samples of test class 1 (class 1 is alphabetically first, class 2 is next) / total number samples see "sample_classes" from train_NBC to check order
 #' @export
 perform_NBC = function(model, asv_table, sample_data, prob_class1) {
   savedParams_overall = model[[3]]
@@ -32,7 +28,7 @@ perform_NBC = function(model, asv_table, sample_data, prob_class1) {
   ##Perform log(P(X|Y)) - log(P(X))
   p_given_class1 = p_given_class1 - p_x_independent_of_y    # = log( P(class1 | X )
   p_given_class2 = p_given_class2 - p_x_independent_of_y    # = log( P(class2 | X )
-  ##Get ASV asthma scores = log( P(class1 | X ) - log( P(class2 | X ) 
+  ##Get ASV asthma scores = log( P(class1 | X ) - log( P(class2 | X )
   #NOTE: class 1 is assumed as the case, class 2 is assumed as the control (we can make this user defined)
   feature_scores = p_given_class1 - p_given_class2
   ##Sum log probabilities for each sample to acquire log(P(Y|X)) - log(P(Y))
@@ -69,11 +65,11 @@ perform_NBC = function(model, asv_table, sample_data, prob_class1) {
       p_1v2["result",p] = sample_classes[which(q == max(q))]
     }
   }
-  
+
   classification_rate = sum(p_1v2["result",]==p_1v2["truth",])/ncol(p_1v2)
   output = list(classification_rate = as.numeric(classification_rate),
                 sample_by_sample = p_1v2,
                 model = model,
                 score_per_feature_per_sample = feature_scores)
   return(output)
-} 
+}
