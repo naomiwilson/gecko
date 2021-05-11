@@ -127,6 +127,55 @@ LogLoss<-function(act, pred)
   return(ll);
 }
 
+#' Plot a feature ROC Curve
+#'
+#' @param sample_data character table col1=sample names, col2=class names
+#' @param perform_NBC_output perform_NBC output
+#' @param train_NBC_output train_NBC output
+#' @param featureAUCsRanked vector of AUCs in rank order
+#' @param idx1 integer rank of first feature to plot
+#' @param idx2 integer rank of last feature to plot
+#' @param title plot title
+#' @param want_label Boolean value - TRUE will print feature name and AUC on the plot (can only fit up to ~6)
+#' @export
+PlotAllROCByFeature <- function(sample_data, perform_NBC_output, train_NBC_output, featureAUCsRanked, idx1, idx2, title, want_label=TRUE) {
+  # transform scores matrix:
+  scores_by_feature <- data.frame(t(perform_NBC_output$score_per_feature_per_sample))
+  scores_by_feature$class = sample_data[,2][sample_data[,1]==row.names(scores_by_feature)]
+  scores_by_feature$binaryClass = ifelse(scores_by_feature$class==train_NBC_output[[4]][1], 1, 0) # make binary: class1 = 1 (case), class2 = 0 (control)
+  # get lotsa unique colors
+  qual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]
+  col_vector = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+  # Plot em
+  plot(1, type="n", xlab="FPR", ylab="TPR", xlim=c(0, 1), ylim=c(0, 1), main=title)
+  thresholds = seq(min(scores_by_feature[,1:(length(names(scores_by_feature))-2)])-1, max(scores_by_feature[,1:(length(names(scores_by_feature))-2)])+1, by = 0.1)
+  # for (asv in names(scores_by_feature[,1:(length(names(scores_by_feature))-2)])){
+  x_coord = 0.9
+  y_coord = 0.75
+  for (asv in row.names(featureAUCsRanked[idx1:idx2,])){
+    roc_obj <- pROC::roc(scores_by_feature$binaryClass, eval(parse(text=paste("scores_by_feature$", asv, sep = ""))))
+    AUC = pROC::auc(roc_obj)
+    TPR=rev(roc_obj$sensitivities)
+    FPR=rev(1 - roc_obj$specificities)
+    labels=roc_obj$response
+    scores=roc_obj$predictor
+    label_color = sample(col_vector,1)
+    thresholdBest = coords(roc_obj, "best", ret = "threshold", transpose = FALSE)
+    lines(FPR, TPR, type="l", col=label_color)
+    if (want_label == TRUE){
+      if (sum(row.names(featureAUCsRanked[idx1:idx2,]) %in% asv)==1) {
+        text(x_coord, y_coord, asv, col = label_color)
+        text(1-x_coord, 1-y_coord+0.4, round(AUC, digits = 2), col = label_color)
+        # text(1-x_coord+0.2, 1-y_coord+0.4, round(thresholdBest, digits = 2), col = label_color)
+        x_coord = x_coord
+        y_coord = y_coord - 0.075
+      }
+    }
+  }
+  abline(a = 0, b = 1, col="black", lw = 3, lty='dashed') # add AUC=0.5 line
+}
+
+
 #' Grab best thresholds per feature from ROC curve
 #'
 #' @param sample_data character matrix: column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
