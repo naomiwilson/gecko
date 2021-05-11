@@ -33,7 +33,7 @@ getFeatureAUCs <- function(train_NBC_output, perform_NBC_output, my_sample_data)
     roc_obj <- pROC::roc(scores_by_feature$binaryClass, eval(parse(text=paste("scores_by_feature$", asv, sep = ""))))
     feature_aucs <- c(feature_aucs, pROC::auc(roc_obj))
     feature_names_list <- c(feature_names_list, asv)
-  } # don't be alarmed, there will be a lot of print-outs...
+  }
   feature_aucs <- data.frame(feature_aucs, row.names = feature_names_list)
   return(feature_aucs)
 }
@@ -183,14 +183,14 @@ getCountMatrixByROCThreshold <- function(perform_NBC_output,
   for (i in 1:dim(featureScoreMatrix)[2]) {
     if (as.character(sample_table$truth[colnames(featureScoreMatrix)[i]]) == case_class_name) {
       # print("this is asthmatic")
-      print(colnames(featureScoreMatrix)[i])
+      # print(colnames(featureScoreMatrix)[i])
       countMatrixByROCThreshold[,i] <-
         as.numeric(featureScoreMatrix[,i] > asvThresholds[row.names(featureScoreMatrix),"threshold"])
       count = count +1
     }
     if (as.character(sample_table$truth[colnames(featureScoreMatrix)[i]]) == ctrl_class_name) {
       # print("this is healthy")
-      print(colnames(featureScoreMatrix)[i])
+      # print(colnames(featureScoreMatrix)[i])
       countMatrixByROCThreshold[,i] <-
         as.numeric(featureScoreMatrix[,i] < asvThresholds[row.names(featureScoreMatrix),"threshold"])
       count = count +1
