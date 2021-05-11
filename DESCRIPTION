@@ -18,5 +18,6 @@ Imports:
 	caret,
 	stats,
 	ggplot2,
-	pROC
+	pROC,
+	RColorBrewer
 
