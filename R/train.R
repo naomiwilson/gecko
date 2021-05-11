@@ -48,7 +48,7 @@ getMapEstimates = function(taxa) {
   n = length(taxa)
   if (n == 0) {return(c(1,1))}
   #Constants
-  weight = 10 #supplies weakness coefficient to the varaince of the normal distributions
+  weight = 10 #supplies weakness coefficient to the variance of the normal distributions
   mu_a = 1
   sig_a = 0.3*weight
   mu_b = 1
