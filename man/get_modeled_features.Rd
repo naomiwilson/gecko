@@ -4,10 +4,10 @@
 \alias{get_modeled_features}
 \title{Get list of features included in model}
 \usage{
-get_modeled_features(model)
+get_modeled_features(train_NBC_output)
 }
 \arguments{
-\item{model}{output from train_NBC}
+\item{train_NBC_output}{output from train_NBC}
 }
 \description{
 Get list of features included in model

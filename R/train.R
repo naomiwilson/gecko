@@ -5,7 +5,7 @@
 #' the total number of samples.
 #' A pseudocount of 1/2 is also included.
 #'
-#' @param taxa
+#' @param taxa vector of relative abundances per taxon
 #' @param limit_of_detection numeric relative abundance value
 #' @return numeric weight value
 #' @export

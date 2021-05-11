@@ -7,6 +7,8 @@
 estimate_binomial_parameter(taxa, limit_of_detection)
 }
 \arguments{
+\item{taxa}{vector of relative abundances per taxon}
+
 \item{limit_of_detection}{numeric relative abundance value}
 }
 \value{
