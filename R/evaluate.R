@@ -5,6 +5,7 @@ make_confusion_matrix = function(p1v2) {
   final = as.factor(p1v2["result",])
   truth = as.factor(p1v2["truth",])
   output = caret::confusionMatrix(final, truth)
+  return(output)
 }
 
 #' Get list of features included in model
@@ -55,7 +56,6 @@ make_sample_score_histograms <- function(scores.df,
                                          title0 = "Healthy (59) Sample Scores",
                                          title1 = "Asthmatic (36) Sample Scores",
                                          class1.color = "#DE4968FF", class0.color = "#51127CFF", both.color = "lightblue",
-                                         class.to.plot,  # 0, 1, 2 (BOTH)
                                          x.label = "Sample Score",
                                          numbins=10)
 {
