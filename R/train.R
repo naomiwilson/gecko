@@ -43,16 +43,12 @@ prior = function(alpha, mu, sig) {
 #' Maximum a posteriori estimation
 #'
 #' @export
-getMapEstimates = function(taxa) {
+getMapEstimates = function(taxa, sig_a = 30, sig_b = 100) {
   taxa = taxa[taxa>0]
   n = length(taxa)
   if (n == 0) {return(c(1,1))}
-  #Constants
-  weight = 10 #supplies weakness coefficient to the variance of the normal distributions
-  mu_a = 1
-  sig_a = 0.3*weight
-  mu_b = 1
-  sig_b = 10*weight
+  mu_a = 1 # default starting place looks like presence vs absence - can make user-defined if they have a good idea of the presence/absence distribution
+  mu_b = 1 # default starting place looks like presence vs absence
   i = 0
   alpha_old = runif(1, min = 0, max = 2)
   beta_old = runif(1, min = 0, max = 100)
@@ -80,12 +76,12 @@ getMapEstimates = function(taxa) {
     alpha_new = results[1]
     beta_new = results[2]
     if (alpha_new<0 | beta_new<0) {
-      alpha_old = runif(1, min = 0, max = 2)
+      alpha_old = runif(1, min = 0, max = 2)  # max values were chosen by Ariel to keep alpha from exploding (another thing that could be user-defined)
       beta_old = runif(1, min = 0, max = 100)
       i = i+1
       next
     }
-    convergence = all(abs(results - c(alpha_old, beta_old))/results<0.001)
+    convergence = all(abs(results - c(alpha_old, beta_old))/results<0.001) # a chosen error value that could be subject to optimization
     if (convergence) {
       output = c(alpha_new, beta_new)
       names(output) = c("shape1", "shape2")
