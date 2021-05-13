@@ -153,3 +153,62 @@ get_concordance_matrices <- function(perform_NBC_output,
   }
   return(list(countMatrixByROCThresholdPairs, countMatrixByROCThresholdPairsVerbose))
 }
+
+#' Get Dyads needed to cover given list of features
+#'
+#' @param ASVs_to_cover list of features for which you'd like to get coverage in a gnotobiotic exptt
+#' @param perform_NBC_output perform_NBC_output
+#' @param sampleConcordanceMatrix output of getCountMatrixByROCThreshold
+#' @param allHumanASVs filtered ASV Table used for model training
+#' @param limit_of_detection limit_of_detection (default=0)
+#' @param case_class_name case_class_name (default = "asthmatic")
+#' @param ctrl_class_name ctrl_class_name (default = "healthy")
+#' @return matrix of dyads best for full coverage of input feature list. Columns: Case (disease cohort) and Ctrl (healthy/control cohort)
+#' @export
+dyads_for_coverage <- function(ASVs_to_cover,  # list of names
+                               perform_NBC_output,
+                               sampleConcordanceMatrix,
+                               allHumanASVs, # filtered asv table from NBC models
+                               limit_of_detection=0,
+                               case_class_name = "asthmatic",
+                               ctrl_class_name = "healthy"){
+  # Initiate a data frame:
+  bestPairsForCoverage <- data.frame(Case=character(),
+                                     Ctrl=character(),
+                                     stringsAsFactors=FALSE)
+  countDet <- 0  # set counter
+
+  # drop asvs that are below LOD
+  rare_and_lowRA = row.names(allHumanASVs)[rowSums(allHumanASVs < my_min_rel_abund) == dim(allHumanASVs)[2]]
+  ASVs_to_cover = ASVs_to_cover[!(ASVs_to_cover %in% rare_and_lowRA)]
+
+  while(length(ASVs_to_cover)>0){
+    conc_matrix_list = get_concordance_matrices(perform_NBC_output = perform_NBC_output,
+                                                sampleConcordanceMatrix=sampleConcordanceMatrix,
+                                                featureAUCsForConcordanceList=ASVs_to_cover,
+                                                allHumanASVs = allHumanASVs,
+                                                limit_of_detection=limit_of_detection,
+                                                case_class_name =case_class_name,
+                                                ctrl_class_name = ctrl_class_name,
+                                                PWCtype="proportion")
+    best_pairs_tmp <- reshape2::melt(conc_matrix_list[[1]])
+    best_a_tmp <- as.character(best_pairs_tmp[which.max(best_pairs_tmp$value),]$Var1) #asthmatic
+    best_h_tmp <- as.character(best_pairs_tmp[which.max(best_pairs_tmp$value),]$Var2) #healthy
+
+    winning_pair <- data.frame(conc_matrix_list[[2]][best_a_tmp])
+    winning_pair <- winning_pair[paste0(best_a_tmp, ".", best_h_tmp)]
+
+    countDet <- countDet + 1
+
+    bestPairsForCoverage[countDet, "Case"] <- best_a_tmp
+    bestPairsForCoverage[countDet, "Ctrl"] <- best_h_tmp
+
+    asvs_covered <- row.names(winning_pair)[winning_pair > 0]
+    ASVs_to_cover <- ASVs_to_cover[!(ASVs_to_cover %in% asvs_covered)]
+
+    print(paste0("pair: ", best_a_tmp, ", ", best_h_tmp))
+    print(ASVs_to_cover)
+
+  }
+  return(bestPairsForCoverage) # include all for testing
+}
