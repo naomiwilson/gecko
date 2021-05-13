@@ -205,10 +205,6 @@ dyads_for_coverage <- function(ASVs_to_cover,  # list of names
 
     asvs_covered <- row.names(winning_pair)[winning_pair > 0]
     ASVs_to_cover <- ASVs_to_cover[!(ASVs_to_cover %in% asvs_covered)]
-
-    print(paste0("pair: ", best_a_tmp, ", ", best_h_tmp))
-    print(ASVs_to_cover)
-
   }
   return(bestPairsForCoverage) # include all for testing
 }
