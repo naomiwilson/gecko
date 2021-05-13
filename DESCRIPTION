@@ -19,5 +19,6 @@ Imports:
 	stats,
 	ggplot2,
 	pROC,
-	RColorBrewer
+	RColorBrewer,
+	reshape2
 
