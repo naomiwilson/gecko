@@ -111,11 +111,14 @@ getMapEstimates = function(taxa, sig_a = 30, sig_b = 100, limit_of_detection=0) 
 #'
 #' @param asv_table rows= ASV names, cols=sample names
 #' @param limit_of_detection relative abundance cutoff
+#' @param sigma_for_alpha sigma value for alpha MAP prior
+#' @param sigma_for_beta sigma value for beta MAP prior
 #' @return savedParams table of P(not detected) and 2 beta parameters
 #' @export
-acquire_parameters = function(asv_table, limit_of_detection) {
+acquire_parameters = function(asv_table, limit_of_detection, sigma_for_alpha, sigma_for_beta) {
   pNotDetected = apply(X = asv_table, MARGIN = 1, estimate_binomial_parameter, limit_of_detection)
-  betaParams = apply(X = asv_table, MARGIN = 1, getMapEstimates)
+  betaParams = apply(X = asv_table, MARGIN = 1, FUN = getMapEstimates,
+                     sig_a=sigma_for_alpha, sig_b=sigma_for_beta, limit_of_detection=limit_of_detection)
   savedParams = rbind(pNotDetected, betaParams)
   row.names(savedParams) = c("pNotDetected", "shape1", "shape2")
   return(savedParams)
@@ -158,9 +161,11 @@ p_giv_class = function(features, asv_table, param_table, sample_data) {
 #' @param sample_data character matrix: column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
 #' @param minimum_detection integer is how many samples in which the ASV has to be present in to be included in the training
 #' @param min_rel_abund integer sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present
+#' @param sigma_for_alpha sigma value for alpha MAP prior
+#' @param sigma_for_beta sigma value for beta MAP prior
 #' @return nested matrix containing 1) parameters for class 1, 2) class 2, 3) both classes, 4) the class names in order, and 5) probability of class 1
 #' @export
-train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund) {
+train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund, sigma_for_alpha=30, sigma_for_beta=100) {
   #filter asv_table
   asv_table = asv_table[,sample_data[,1]]
   # print(dim(asv_table))
@@ -168,17 +173,26 @@ train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund) {
   #acquire class names
   sample_classes = sort(unique(sample_data[,2])) # class 1 is always alphabetically first
   #acquire overall parameters
-  savedParams_overall = acquire_parameters(asv_table = asv_table, limit_of_detection = min_rel_abund)
+  savedParams_overall = acquire_parameters(asv_table = asv_table,
+                                           limit_of_detection = min_rel_abund,
+                                           sigma_for_alpha = sigma_for_alpha,
+                                           sigma_for_beta = sigma_for_beta)
   #acquire parameters for class 1
   sample_data_1 = sample_data[sample_data[,2]==sample_classes[1],]
   asv_table_1 = asv_table[,sample_data_1[,1]]
   # asv_table_1 = asv_table_1[rowSums(asv_table_1>0)>=minimum_detection,] # getting rid of this for md=7
-  savedParams_class1 = acquire_parameters(asv_table = asv_table_1, limit_of_detection = min_rel_abund)
+  savedParams_class1 = acquire_parameters(asv_table = asv_table_1,
+                                          limit_of_detection = min_rel_abund,
+                                          sigma_for_alpha = sigma_for_alpha,
+                                          sigma_for_beta = sigma_for_beta)
   #acquire parameters for class 2
   sample_data_2 = sample_data[sample_data[,2]==sample_classes[2],]
   asv_table_2 = asv_table[,sample_data_2[,1]]
   # asv_table_2 = asv_table_2[rowSums(asv_table_2>0)>=minimum_detection,] # getting rid of this for md=7
-  savedParams_class2 = acquire_parameters(asv_table = asv_table_2, limit_of_detection = min_rel_abund)
+  savedParams_class2 = acquire_parameters(asv_table = asv_table_2,
+                                          limit_of_detection = min_rel_abund,
+                                          sigma_for_alpha = sigma_for_alpha,
+                                          sigma_for_beta = sigma_for_beta)
   #Identify shared parameters
   class_1_features = colnames(savedParams_class1)
   class_2_features = colnames(savedParams_class2)
