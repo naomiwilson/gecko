@@ -4,7 +4,7 @@
 \alias{getMapEstimates}
 \title{Maximum a posteriori estimation}
 \usage{
-getMapEstimates(taxa, sig_a = 30, sig_b = 100)
+getMapEstimates(taxa, sig_a = 30, sig_b = 100, limit_of_detection = 0)
 }
 \arguments{
 \item{taxa}{vector of relative abundances for a given taxon}
@@ -12,6 +12,8 @@ getMapEstimates(taxa, sig_a = 30, sig_b = 100)
 \item{sig_a}{Gaussian prior parameter for alpha (default=30)}
 
 \item{sig_b}{Gaussian prior parameter for beta (default=100)}
+
+\item{limit_of_detection}{relative abundance cutoff (default=0)}
 }
 \value{
 fit beta parameters

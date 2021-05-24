@@ -50,10 +50,11 @@ prior = function(alpha, mu, sig) {
 #' @param taxa vector of relative abundances for a given taxon
 #' @param sig_a Gaussian prior parameter for alpha (default=30)
 #' @param sig_b Gaussian prior parameter for beta (default=100)
+#' @param limit_of_detection relative abundance cutoff (default=0)
 #' @return fit beta parameters
 #' @export
-getMapEstimates = function(taxa, sig_a = 30, sig_b = 100) {
-  taxa = taxa[taxa>0]
+getMapEstimates = function(taxa, sig_a = 30, sig_b = 100, limit_of_detection=0) {
+  taxa = taxa[taxa>limit_of_detection]  # make this limit of detection
   n = length(taxa)
   if (n == 0) {return(c(1,1))}
   mu_a = 1 # default starting place looks like presence vs absence - can make user-defined if they have a good idea of the presence/absence distribution
