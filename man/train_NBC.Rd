@@ -4,7 +4,14 @@
 \alias{train_NBC}
 \title{NBC Training Function}
 \usage{
-train_NBC(asv_table, sample_data, minimum_detection, min_rel_abund)
+train_NBC(
+  asv_table,
+  sample_data,
+  minimum_detection,
+  min_rel_abund,
+  sigma_for_alpha = 30,
+  sigma_for_beta = 100
+)
 }
 \arguments{
 \item{asv_table}{double: rows= ASV names, cols=sample names}
@@ -14,6 +21,10 @@ train_NBC(asv_table, sample_data, minimum_detection, min_rel_abund)
 \item{minimum_detection}{integer is how many samples in which the ASV has to be present in to be included in the training}
 
 \item{min_rel_abund}{integer sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present}
+
+\item{sigma_for_alpha}{sigma value for alpha MAP prior}
+
+\item{sigma_for_beta}{sigma value for beta MAP prior}
 }
 \value{
 nested matrix containing 1) parameters for class 1, 2) class 2, 3) both classes, 4) the class names in order, and 5) probability of class 1

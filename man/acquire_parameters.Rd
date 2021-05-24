@@ -4,12 +4,21 @@
 \alias{acquire_parameters}
 \title{General Acquire Parameters Function}
 \usage{
-acquire_parameters(asv_table, limit_of_detection)
+acquire_parameters(
+  asv_table,
+  limit_of_detection,
+  sigma_for_alpha,
+  sigma_for_beta
+)
 }
 \arguments{
 \item{asv_table}{rows= ASV names, cols=sample names}
 
 \item{limit_of_detection}{relative abundance cutoff}
+
+\item{sigma_for_alpha}{sigma value for alpha MAP prior}
+
+\item{sigma_for_beta}{sigma value for beta MAP prior}
 }
 \value{
 savedParams table of P(not detected) and 2 beta parameters
