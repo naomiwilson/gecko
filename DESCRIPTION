@@ -1,4 +1,4 @@
-Package: nariel
+Package: gecko
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "ngwilson@wustl.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: Nominates human samples for gnotobiotic experiments from binary cohort microbial community data
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
