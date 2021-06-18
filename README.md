@@ -32,9 +32,7 @@ The package should take approximately <30 seconds to install on a recommended co
 
 ### Hardware Requirements
 
-The `gecko` package requires only a standard computer with enough RAM to support the operations defined by a user. Authors used machines with these specs: 16 GB RAM, 6 2.2-Ghz cores.
-
-The runtimes below are generated using a computer with the recommended specs (16 GB RAM, 4 cores@3.3 GHz) and internet of speed 25 Mbps.
+The `gecko` package requires only a standard computer with enough RAM to support the operations defined by a user. Authors used machines with these specs for development and calculating runtimes: 16 GB RAM, 6 2.2-Ghz cores.
 
 ### Software Requirements
 
