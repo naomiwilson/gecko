@@ -1,13 +1,16 @@
 Package: gecko
-Title: What the Package Does (One Line, Title Case)
+Title: Naive Bayes Classifier for scoring human microbiomes
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "Naomi",
-           family = "Wilson",
-           role = c("aut", "cre"),
-           email = "ngwilson@wustl.edu",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Nominates human samples for gnotobiotic experiments from binary cohort microbial community data
+Authors@R: c(person("Naomi", "Wilson", role = c("aut", "cre"),
+	   	    email = "naomigracewilson@gmail.com"),
+	   	 person("Ariel", "Hernandez-Leyva", role=c("aut", "cre"),
+	   	        email="a.hernandez-leyva@wustl.edu"),
+	     person("S. Joshua", "Swamidass", role = "ctb",
+	            email = "swamidass@wustl.edu"),
+	     person("Andrew", "Kau", role = "ths",
+	     	    email = "akau@wustl.edu"))
+Description: Mixture model Naive Bayes Classifier for nominating representative microbiomes from two cohorts for gnotobiotic experiments.
+Depends: R (<= 3.6.3)
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
@@ -21,4 +24,3 @@ Imports:
 	pROC,
 	RColorBrewer,
 	reshape2
-
