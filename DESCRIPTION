@@ -3,7 +3,7 @@ Title: Naive Bayes Classifier for scoring human microbiomes
 Version: 0.0.0.9000
 Authors@R: c(person("Naomi", "Wilson", role = c("aut", "cre"),
 	   	    email = "naomigracewilson@gmail.com"),
-	   	 person("Ariel", "Hernandez-Leyva", role=c("aut", "cre"),
+	   	 person("Ariel", "Hernandez-Leyva", role=c("aut"),
 	   	        email="a.hernandez-leyva@wustl.edu"),
 	     person("S. Joshua", "Swamidass", role = "ctb",
 	            email = "swamidass@wustl.edu"),
