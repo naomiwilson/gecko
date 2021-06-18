@@ -6,6 +6,7 @@ Mixture model Naive Bayes Classifier for nominating representative microbiomes f
 ## Installation Guide
 
 built with R 3.6.3
+
 Not working in R 4.x yet!
 
 ### Package dependencies
@@ -26,7 +27,7 @@ install_github('naomiwilson/gecko', force=TRUE)
 require(gecko)
 ```
 
-The package should take approximately <30 seconds to install on a recommended computer. 
+The package should take <30 seconds to install on a recommended computer. 
 
 ## System Requirements
 
