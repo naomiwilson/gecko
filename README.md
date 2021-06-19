@@ -43,10 +43,12 @@ The developmental version of the package has been tested on the following system
 
 macOSX 10.16
 
-Windows
+Windows 10
 
 #### Runtimes
 These runtimes are based on use of recommended machine with input of 95 microbiomes and 2125 unique ASVs total.
+
 train_NBC: runtime 0.55 seconds
+
 perform_NBC: runtime 1.176 seconds
 
