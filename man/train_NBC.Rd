@@ -9,7 +9,7 @@ train_NBC(
   sample_data,
   minimum_detection,
   min_rel_abund,
-  sigma_for_alpha = 30,
+  sigma_for_alpha = 3,
   sigma_for_beta = 100
 )
 }
