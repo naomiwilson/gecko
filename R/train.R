@@ -48,7 +48,7 @@ prior = function(alpha, mu, sig) {
 #' Maximum a posteriori estimation
 #'
 #' @param taxa vector of relative abundances for a given taxon
-#' @param sig_a Gaussian prior parameter for alpha (default=30)
+#' @param sig_a Gaussian prior parameter for alpha (default=3)
 #' @param sig_b Gaussian prior parameter for beta (default=100)
 #' @param limit_of_detection relative abundance cutoff (default=0)
 #' @return fit beta parameters
@@ -105,7 +105,6 @@ getMapEstimates = function(taxa, sig_a = 3, sig_b = 100, limit_of_detection=0) {
   }
   return(c("Failure", alpha_new, beta_new, alpha_old, beta_old))
 }
-
 
 #' General Acquire Parameters Function
 #'
@@ -165,7 +164,7 @@ p_giv_class = function(features, asv_table, param_table, sample_data) {
 #' @param sigma_for_beta sigma value for beta MAP prior
 #' @return nested matrix containing 1) parameters for class 1, 2) class 2, 3) both classes, 4) the class names in order, and 5) probability of class 1
 #' @export
-train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund, sigma_for_alpha=30, sigma_for_beta=100) {
+train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund, sigma_for_alpha=3, sigma_for_beta=100) {
   #filter asv_table
   asv_table = asv_table[,sample_data[,1]]
   # print(dim(asv_table))
