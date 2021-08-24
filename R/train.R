@@ -164,7 +164,7 @@ p_giv_class = function(features, asv_table, param_table, sample_data) {
 #' @param sigma_for_beta sigma value for beta MAP prior
 #' @return nested matrix containing 1) parameters for class 1, 2) class 2, 3) both classes, 4) the class names in order, and 5) probability of class 1
 #' @export
-train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund, sigma_for_alpha=3, sigma_for_beta=100) {
+train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund, sigma_for_alpha=10, sigma_for_beta=30) {
   #filter asv_table
   asv_table = asv_table[,sample_data[,1]]
   # print(dim(asv_table))
