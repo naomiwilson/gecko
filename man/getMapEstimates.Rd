@@ -4,7 +4,7 @@
 \alias{getMapEstimates}
 \title{Maximum a posteriori estimation}
 \usage{
-getMapEstimates(taxa, sig_a = 3, sig_b = 100, limit_of_detection = 0)
+getMapEstimates(taxa, sig_a = 10, sig_b = 30, limit_of_detection = 0)
 }
 \arguments{
 \item{taxa}{vector of relative abundances for a given taxon}
