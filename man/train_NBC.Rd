@@ -9,8 +9,8 @@ train_NBC(
   sample_data,
   minimum_detection,
   min_rel_abund,
-  sigma_for_alpha = 3,
-  sigma_for_beta = 100
+  sigma_for_alpha = 10,
+  sigma_for_beta = 30
 )
 }
 \arguments{
@@ -22,9 +22,9 @@ train_NBC(
 
 \item{min_rel_abund}{integer sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present}
 
-\item{sigma_for_alpha}{sigma value for alpha MAP prior}
+\item{sigma_for_alpha}{sigma value for alpha MAP prior (default=10)}
 
-\item{sigma_for_beta}{sigma value for beta MAP prior}
+\item{sigma_for_beta}{sigma value for beta MAP prior (default=30)}
 }
 \value{
 nested matrix containing 1) parameters for class 1, 2) class 2, 3) both classes, 4) the class names in order, and 5) probability of class 1

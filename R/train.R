@@ -48,8 +48,8 @@ prior = function(alpha, mu, sig) {
 #' Maximum a posteriori estimation
 #'
 #' @param taxa vector of relative abundances for a given taxon
-#' @param sig_a Gaussian prior parameter for alpha (default=3)
-#' @param sig_b Gaussian prior parameter for beta (default=100)
+#' @param sig_a Gaussian prior parameter for alpha (default=10)
+#' @param sig_b Gaussian prior parameter for beta (default=30)
 #' @param limit_of_detection relative abundance cutoff (default=0)
 #' @return fit beta parameters
 #' @export
@@ -160,8 +160,8 @@ p_giv_class = function(features, asv_table, param_table, sample_data) {
 #' @param sample_data character matrix: column 1 = sample names; column 2 = class labels (e.g. "asthmatic" and "healthy")
 #' @param minimum_detection integer is how many samples in which the ASV has to be present in to be included in the training
 #' @param min_rel_abund integer sequencing detection limit - the relative abundance value at which we no longer trust the ASV is truly present
-#' @param sigma_for_alpha sigma value for alpha MAP prior
-#' @param sigma_for_beta sigma value for beta MAP prior
+#' @param sigma_for_alpha sigma value for alpha MAP prior (default=10)
+#' @param sigma_for_beta sigma value for beta MAP prior (default=30)
 #' @return nested matrix containing 1) parameters for class 1, 2) class 2, 3) both classes, 4) the class names in order, and 5) probability of class 1
 #' @export
 train_NBC = function(asv_table, sample_data, minimum_detection, min_rel_abund, sigma_for_alpha=10, sigma_for_beta=30) {

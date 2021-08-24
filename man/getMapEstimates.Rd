@@ -9,9 +9,9 @@ getMapEstimates(taxa, sig_a = 10, sig_b = 30, limit_of_detection = 0)
 \arguments{
 \item{taxa}{vector of relative abundances for a given taxon}
 
-\item{sig_a}{Gaussian prior parameter for alpha (default=3)}
+\item{sig_a}{Gaussian prior parameter for alpha (default=10)}
 
-\item{sig_b}{Gaussian prior parameter for beta (default=100)}
+\item{sig_b}{Gaussian prior parameter for beta (default=30)}
 
 \item{limit_of_detection}{relative abundance cutoff (default=0)}
 }
