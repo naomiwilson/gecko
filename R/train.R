@@ -53,7 +53,7 @@ prior = function(alpha, mu, sig) {
 #' @param limit_of_detection relative abundance cutoff (default=0)
 #' @return fit beta parameters
 #' @export
-getMapEstimates = function(taxa, sig_a = 3, sig_b = 100, limit_of_detection=0) {
+getMapEstimates = function(taxa, sig_a = 10, sig_b = 30, limit_of_detection=0) {
   taxa = taxa[taxa>limit_of_detection]  # make this limit of detection
   n = length(taxa)
   if (n == 0) {return(c(1,1))}
