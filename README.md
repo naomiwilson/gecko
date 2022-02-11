@@ -1,4 +1,4 @@
-gecko
+gnominator
 ==============================
 
 Mixture model Naive Bayes Classifier for nominating representative microbiomes from two cohorts for gnotobiotic experiments
@@ -11,7 +11,7 @@ Not working in R 4.x yet!
 
 ### Package dependencies
 
-Users should install the following packages prior to installing `gecko`, from an `R` terminal:
+Users should install the following packages prior to installing `gnominator`, from an `R` terminal:
 
 ```
 install.packages(c('ggplot2', 'caret', 'stats', 'pROC', 'RColorBrewer', 'reshape2'))
@@ -23,8 +23,8 @@ From an `R` session, type:
 
 ```
 require(devtools)
-install_github('naomiwilson/gecko', force=TRUE)
-require(gecko)
+install_github('naomiwilson/gnominator', force=TRUE)
+require(gnominator)
 ```
 
 The package should take <30 seconds to install on a recommended computer. 
@@ -33,7 +33,7 @@ The package should take <30 seconds to install on a recommended computer.
 
 ### Hardware Requirements
 
-The `gecko` package requires only a standard computer with enough RAM to support the operations defined by a user. Authors used machines with these specs for development and calculating runtimes: 16 GB RAM, 6 2.2-Ghz cores.
+The `gnominator` package requires only a standard computer with enough RAM to support the operations defined by a user. Authors used machines with these specs for development and calculating runtimes: 16 GB RAM, 6 2.2-Ghz cores.
 
 ### Software Requirements
 
