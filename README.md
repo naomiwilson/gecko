@@ -3,6 +3,11 @@ gnominator
 
 Mixture model Naive Bayes Classifier for nominating representative microbiomes from two cohorts for gnotobiotic experiments
 
+See pre-print for more info: 
+The asthma gut microbiota influences lung inflammation in gnotobiotic mice. 
+Naomi G. Wilson, Ariel Hernandez-Leyva, Anne L. Rosen, Natalia Jaeger, Ryan T. McDonough, Jesus Santiago-Borges, Michael A. Lint, Thomas R. Rosen, Christopher P. Tomera, Leonard B. Bacharier, S. Joshua Swamidass, Andrew L. Kau
+bioRxiv 2022.08.09.502549; doi: https://doi.org/10.1101/2022.08.09.502549
+
 ## Installation Guide
 
 built with R 3.6.3
