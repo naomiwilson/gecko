@@ -1,5 +1,6 @@
 gnominator
 ==============================
+[![DOI](https://zenodo.org/badge/366433171.svg)](https://zenodo.org/badge/latestdoi/366433171)
 
 Mixture model Naive Bayes Classifier for nominating representative microbiomes from two cohorts for gnotobiotic experiments
 
