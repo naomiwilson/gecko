@@ -9,10 +9,10 @@ S Joshua Swamidass, MD PhD - Conceptualization, Methodology
 Andrew L. Kau, MD PhD - Conceptualization, Methodology, Supervision, Management, Funding Acquisition
 @Washington University School of Medicine
 
-See pre-print for more info: 
-The asthma gut microbiota influences lung inflammation in gnotobiotic mice. 
+See publication for more info: 
+The gut microbiota of people with asthma influences lung inflammation in gnotobiotic mice.
 Naomi G. Wilson, Ariel Hernandez-Leyva, Anne L. Rosen, Natalia Jaeger, Ryan T. McDonough, Jesus Santiago-Borges, Michael A. Lint, Thomas R. Rosen, Christopher P. Tomera, Leonard B. Bacharier, S. Joshua Swamidass, Andrew L. Kau
-bioRxiv 2022.08.09.502549; doi: https://doi.org/10.1101/2022.08.09.502549
+iScience 2023; doi: https://doi.org/10.1016/j.isci.2023.105991
 
 ## Installation Guide
 
