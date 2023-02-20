@@ -2,17 +2,17 @@ gnominator
 ==============================
 [![DOI](https://zenodo.org/badge/366433171.svg)](https://zenodo.org/badge/latestdoi/366433171)
 
-Mixture model Naive Bayes Classifier for nominating representative microbiomes from two cohorts for gnotobiotic experiments
+Mixture model Naive Bayes Classifier for nominating representative microbiomes from two cohorts for gnotobiotic experiments  
 
-Naomi G. Wilson & Ariel Hernandez-Leyva - Conceptualization, Methodology, Software
-S Joshua Swamidass, MD PhD - Conceptualization, Methodology
-Andrew L. Kau, MD PhD - Conceptualization, Methodology, Supervision, Management, Funding Acquisition
-@Washington University School of Medicine
+Naomi G. Wilson & Ariel Hernandez-Leyva - Conceptualization, Methodology, Software  
+S Joshua Swamidass, MD PhD - Conceptualization, Methodology  
+Andrew L. Kau, MD PhD - Conceptualization, Methodology, Supervision, Management, Funding Acquisition  
+@Washington University School of Medicine  
 
-See publication for more info: 
-The gut microbiota of people with asthma influences lung inflammation in gnotobiotic mice.
-Naomi G. Wilson, Ariel Hernandez-Leyva, Anne L. Rosen, Natalia Jaeger, Ryan T. McDonough, Jesus Santiago-Borges, Michael A. Lint, Thomas R. Rosen, Christopher P. Tomera, Leonard B. Bacharier, S. Joshua Swamidass, Andrew L. Kau
-iScience 2023; doi: https://doi.org/10.1016/j.isci.2023.105991
+See publication for more info:  
+The gut microbiota of people with asthma influences lung inflammation in gnotobiotic mice.  
+Naomi G. Wilson, Ariel Hernandez-Leyva, Anne L. Rosen, Natalia Jaeger, Ryan T. McDonough, Jesus Santiago-Borges, Michael A. Lint, Thomas R. Rosen, Christopher P. Tomera, Leonard B. Bacharier, S. Joshua Swamidass, Andrew L. Kau  
+iScience 2023; doi: https://doi.org/10.1016/j.isci.2023.105991  
 
 ## Installation Guide
 
